@@ -1,6 +1,5 @@
-import { isDotAllowed, isDot, isOperator, isNumber, isOperatorInExpression } from "../util/util.js";
+import { isDot, isOperator, isNumber, isOperatorInExpression } from "../util/util.js";
 import { display } from "../const/elements.js";
-import { operators } from "../const/const.js";
 
 /**
  * Clears the display.
@@ -22,10 +21,7 @@ function deleteLastChar() {
 function calculateResult() {
   try {
     let expression = display.value;
-    const lastChar = expression.slice(-1);
-    if (operators.includes(lastChar)) {
-      expression = expression.slice(0, -1);
-    }
+
     display.value = eval(
       expression.replace("×", "*").replace("÷", "/").replace("−", "-")
     ).toString();
