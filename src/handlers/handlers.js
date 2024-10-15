@@ -48,32 +48,30 @@ function handleKeyDown(e) {
  * @param {MouseEvent} e - The click event.
  */
 function handleButtonClick(e) {
-  const button = e.target.closest(".calculator__button");
-  if (button) {
-    const value = button.textContent.trim();
-    switch (value) {
-      case "AC":
-        clearDisplay();
-        break;
-      case "⌫":
-        deleteLastChar();
-        break;
-      case "=":
-        calculateResult();
-        break;
-      case ".":
-        if (isDotAllowed()) {
-          appendToDisplay(value);
-        }
-        break;
-      case "+/-":
-        toggleSign();
-        break;
-      default:
+  const value = e.target.textContent;
+
+  switch (value) {
+    case "AC":
+      clearDisplay();
+      break;
+    case "⌫":
+      deleteLastChar();
+      break;
+    case "=":
+      calculateResult();
+      break;
+    case ".":
+      if (isDotAllowed()) {
         appendToDisplay(value);
-        break;
-    }
+      }
+      break;
+    case "+/-":
+      toggleSign();
+      break;
+    default:
+      appendToDisplay(value);
+      break;
   }
 }
 
-export {toggleTheme, handleKeyDown, handleButtonClick}
+export { toggleTheme, handleKeyDown, handleButtonClick };
