@@ -23,6 +23,7 @@ function handleKeyDown(e) {
     case "Enter":
       calculateResult();
       break;
+    case "Delete":
     case "Escape":
       clearDisplay();
       break;
