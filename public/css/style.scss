@@ -1,0 +1,160 @@
+body {
+  background-color: black;
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.calculator {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    font-size: 18px;
+  };
+
+  &__header-item {
+    color: gray;
+    cursor: not-allowed;
+    transition: color 0.3s;
+  };
+
+  &__header-item_active {
+    color: white;
+    cursor: pointer;
+  };
+
+  &__display {
+    font-size: 48px;
+    text-align: right;
+    padding: 20px;
+    border: none;
+    background-color: black;
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 1px solid #333;
+    transition: background-color 0.3s, color 0.3s;
+    pointer-events: none;
+  };
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+  };
+
+  &__button-row {
+    display: flex;
+    gap: 10px;
+  };
+
+  &__button {
+    background-color: #333;
+    border: none;
+    border-radius: 10px;
+    font-size: 24px;
+    color: white;
+    padding: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      background-color: #555;
+    };
+
+    &_number {
+      color: white;
+    };
+
+    &_operator {
+      color: #ff8c42;
+    };
+
+    &_orange {
+      background-color: #ff8c42;
+      color: white;
+
+      &:hover {
+        background-color: #ff9c52;
+      };
+    };
+  };
+};
+
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+};
+
+.light-theme {
+  background-color: white;
+  color: black;
+
+  .calculator {
+    &__header-item {
+      color: gray;
+
+      &_active {
+        color: black;
+        cursor: pointer;
+      };
+    };
+
+    &__display {
+      background-color: white;
+      color: black;
+      border-bottom: 1px solid #ccc;
+    };
+
+    &__button {
+      background-color: #ccc;
+      color: black;
+
+      &:hover {
+        background-color: #bbb;
+      };
+
+      &_orange {
+        background-color: #ff8c42;
+        color: white;
+
+        &_hover {
+          background-color: #ff9c52;
+        };
+      };
+
+      &_operator {
+        color: #ff8c42;
+      };
+
+      &_number {
+        color: black;
+      };
+    }
+  }
+
+  .theme-toggle {
+    color: black;
+  };
+}

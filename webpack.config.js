@@ -1,5 +1,4 @@
 const path = require('path');
-const CopyPlagin = require('copy-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -13,16 +12,6 @@ module.exports = {
   plugins: [
     new HtmlPlugin({
       template: 'public/index.html',
-    }),
-    new CopyPlagin({
-      patterns: [
-        {
-          from: 'public',
-          globOptions: {
-            ignore: ['**/index.html'],
-          },
-        },
-      ],
     }),
   ],
   module: {
@@ -38,8 +27,8 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader']
+        test: /\.s[ac]ss$/i,
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
     ],
   },
