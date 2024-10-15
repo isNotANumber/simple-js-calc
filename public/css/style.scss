@@ -135,6 +135,14 @@ body {
         background-color: #bbb;
       };
 
+      &_operator {
+        color: #ff8c42;
+      };
+
+      &_number {
+        color: black;
+      };
+
       &_orange {
         background-color: #ff8c42;
         color: white;
@@ -142,14 +150,6 @@ body {
         &_hover {
           background-color: #ff9c52;
         };
-      };
-
-      &_operator {
-        color: #ff8c42;
-      };
-
-      &_number {
-        color: black;
       };
     }
   }
