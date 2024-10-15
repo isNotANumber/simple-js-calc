@@ -6,7 +6,7 @@ import { validChars, operators } from "../const/const.js";
 * @returns {boolean} - True if a dot is allowed, false otherwise.
 */
 function isDotAllowed() {
-  const lastNumber = display.value.split(/[\+\−\×\÷]/).pop();
+  const lastNumber = display.value.split(/[\+\-\*\/]/).pop();
   return !lastNumber.includes('.') && !isNaN(lastNumber);
 }
 

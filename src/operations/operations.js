@@ -20,11 +20,7 @@ function deleteLastChar() {
  */
 function calculateResult() {
   try {
-    let expression = display.value;
-
-    display.value = eval(
-      expression.replace("×", "*").replace("÷", "/").replace("−", "-")
-    ).toString();
+    display.value = eval(display.value);
   } catch {
     display.value = "Error";
   }

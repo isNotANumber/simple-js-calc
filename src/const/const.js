@@ -1,11 +1,11 @@
 /**
  * Allowed operators.
  */
-const operators = ["+", "−", "×", "÷", "%"];
+const operators = ["+", "-", "*", "/", "%"];
 
 /**
- * Allowed chars to input.
+ * Allowed chars to input from keyboard.
  */
-const validChars = '0123456789+-×÷.%';
+const validChars = '0123456789+-*/.%';
 
 export {operators, validChars}

@@ -30,12 +30,6 @@ function handleKeyDown(e) {
     case "Backspace":
       deleteLastChar();
       break;
-    case "*":
-      appendToDisplay("×");
-      break;
-    case "/":
-      appendToDisplay("÷");
-      break;
     case ".":
       if (isDotAllowed()) {
         appendToDisplay(e.key);
@@ -72,7 +66,7 @@ function handleButtonClick(e) {
           appendToDisplay(value);
         }
         break;
-      case "±":
+      case "+/-":
         toggleSign();
         break;
       default:
