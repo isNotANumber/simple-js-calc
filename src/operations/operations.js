@@ -1,4 +1,4 @@
-import { isDotAllowed } from "../util/util.js";
+import { isDotAllowed, isDot, isOperator, isNumber, isOperatorInExpression } from "../util/util.js";
 import { display } from "../const/elements.js";
 import { operators } from "../const/const.js";
 
@@ -39,21 +39,21 @@ function calculateResult() {
  * @param {string} value - The value to append.
  */
 function appendToDisplay(value) {
-  if (display.value === "0" && value !== ".") {
+  const lastChar = display.value.slice(-1);
+
+  if (isNumber(value) && display.value === "0") {
     display.value = value;
-  } else if (display.value === "Error") {
-    display.value = value;
+  } else if (isOperator(value) && isOperator(lastChar)) {
+    display.value = display.value.slice(0, -1) + value;
+  }
+  else if (isOperator(value) && isOperatorInExpression(display.value)) {
+    calculateResult();
+    display.value += value;
+  }
+  else if (isDot(value) && isOperator(lastChar)) {
+    display.value += "0.";
   } else {
-    const lastChar = display.value.slice(-1);
-    if (operators.includes(lastChar) && operators.includes(value)) {
-      display.value = display.value.slice(0, -1) + value;
-    } else if (value === "." && !isDotAllowed()) {
-      return;
-    } else if (operators.includes(lastChar) && value === ".") {
-      display.value += "0.";
-    } else {
-      display.value += value;
-    }
+    display.value += value;
   }
 }
 
