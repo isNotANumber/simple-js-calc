@@ -1,3 +1,4 @@
 import "../public/css/style.scss";
+import applyListeners from "./listeners/listeners";
 
-console.log('Hello, World!')
+applyListeners();
