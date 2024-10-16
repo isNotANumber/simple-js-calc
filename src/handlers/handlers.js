@@ -10,7 +10,8 @@ import { isDotAllowed, isValidChar } from "../util/util.js";
 /**
  * Toggles the theme between light and dark.
  */
-function toggleTheme() {
+function handleThemeToggle() {
+  document.body.classList.toggle("dark-theme");
   document.body.classList.toggle("light-theme");
 }
 
@@ -74,4 +75,4 @@ function handleButtonClick(e) {
   }
 }
 
-export { toggleTheme, handleKeyDown, handleButtonClick };
+export { handleThemeToggle, handleKeyDown, handleButtonClick };

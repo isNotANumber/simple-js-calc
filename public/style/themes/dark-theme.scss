@@ -1,0 +1,49 @@
+@use "sass:map";
+@import './themes-var.scss';
+
+.dark-theme {
+  background-color: getDarkThemeKey('background');
+  color: getDarkThemeKey('color');
+
+  .calculator {
+    &__header-item {
+      color: getDarkThemeKey('header-item');
+
+      &_active {
+        color: getDarkThemeKey('header-item-active');
+      };
+    };
+
+    &__display {
+      background-color: black;
+      color: white;
+      border-bottom: 1px solid getDarkThemeKey('display-border');
+    };
+
+    &__button {
+      background-color: getDarkThemeKey('button-background');
+      color: white;
+
+      &:hover {
+        background-color: getDarkThemeKey('button-hover');
+      };
+
+      &_operator {
+        color: getDarkThemeKey('button-operator');
+      };
+
+      &_orange {
+        background-color: getDarkThemeKey('button-orange-background');
+        color: getDarkThemeKey('button-orange');
+
+        &:hover {
+          background-color: getDarkThemeKey('button-orange-hover-background');
+        };
+      };
+    }
+  }
+
+  .theme-toggle {
+    color: getDarkThemeKey('theme-toggle');
+  };
+}

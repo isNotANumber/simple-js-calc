@@ -28,6 +28,7 @@ module.exports = {
       },
       {
         test: /\.s[ac]ss$/i,
+        exclude: /theme\//i,
         use: ['style-loader', 'css-loader', 'sass-loader']
       },
     ],

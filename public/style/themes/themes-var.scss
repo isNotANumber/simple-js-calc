@@ -1,0 +1,37 @@
+$dark-theme-colors: (
+  'background': black,
+  'color': white,
+  'header-item': gray,
+  'header-item-active': white,
+  'display-border': #333,
+  'button-background': #333,
+  'button-hover': #555,
+  'button-operator': #ff8c42,
+  'button-orange-background': #ff8c42,
+  'button-orange': white,
+  'button-orange-hover-background': #ff9c52,
+  'theme-toggle': white,
+);
+
+$light-theme-colors: (
+  'background': white,
+  'color': black,
+  'header-item': gray,
+  'header-item-active': black,
+  'display-border': #ccc,
+  'button-background': #ccc,
+  'button-hover': #bbb,
+  'button-operator': #ff8c42,
+  'button-orange-background': #ff8c42,
+  'button-orange': white,
+  'button-orange-hover-background': #ff9c52,
+  'theme-toggle': black,
+);
+
+@function getDarkThemeKey($key) {
+  @return map-get($map: $dark-theme-colors, $key: $key);
+}
+
+@function getLightThemeKey($key) {
+  @return map-get($map: $light-theme-colors, $key: $key);
+}
