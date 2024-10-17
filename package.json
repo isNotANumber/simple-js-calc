@@ -1,8 +1,15 @@
 {
     "name": "simple-js-calc",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "private": "false",
     "description": "Простой учебный пет-калькулятор",
+    "browserslist": [
+      "last 2 versions",
+      "not dead",
+      "not ie <= 11",
+      "not op_mini all",
+      "not < 0.25%"
+    ],
     "scripts": {
         "build": "webpack --mode production",
         "start": "webpack server --mode development --open"
