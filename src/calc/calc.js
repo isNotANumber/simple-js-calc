@@ -2,20 +2,30 @@ import { displayElement } from "../const/elements";
 import { isDot, isOperator, isNumber, isOperatorInExpression } from "../util/util.js";
 
 const Calc = {
+  expression: '0',
   display: displayElement,
+
+  /**
+   * Displays the expression on the calculator display.
+   */
+  drawExpression() {
+    this.display.value = this.expression;
+  },
 
   /**
    * Clears the display.
    */
-  clearDisplay() {
-    this.display.value = "0";
+  clearExpression() {
+    this.expression = "0";
+    this.drawExpression();
   },
 
   /**
    * Deletes the last character from the display.
    */
   deleteLastChar() {
-    this.display.value = this.display.value.slice(0, -1) || "0";
+    this.expression= this.expression.slice(0, -1) || "0";
+    this.drawExpression();
   },
 
   /**
@@ -23,51 +33,57 @@ const Calc = {
    */
   calculateResult() {
     try {
-      this.display.value = eval(this.display.value);
+      this.expression = String(eval(this.expression));
     } catch {
-      this.display.value = "Error";
+      this.expression = "Error";
     }
+
+    this.drawExpression();
   },
 
   /**
-   * Appends a value to the display.
+   * Appends a value to the calc expression.
    * @param {string} value - The value to append.
    */
-  appendToDisplay(value) {
-    const lastChar = this.display.value.slice(-1);
+  appendToExpression(value) {
+    const lastChar = this.expression.slice(-1);
 
-    if (isNumber(value) && this.display.value === "0") {
-      this.display.value = value;
+    if (isNumber(value) && this.expression === "0") {
+      this.expression = value;
     } else if (isOperator(value) && isOperator(lastChar)) {
-      this.display.value = this.display.value.slice(0, -1) + value;
+      this.expression = this.expression.slice(0, -1) + value;
     } else if (
       isOperator(value) &&
-      isOperatorInExpression(this.display.value)
+      isOperatorInExpression(this.expression)
     ) {
       this.calculateResult();
-      this.display.value += value;
+      this.expression += value;
     } else if (isDot(value) && isOperator(lastChar)) {
-      this.display.value += "0.";
+      this.expression += "0.";
     } else {
-      this.display.value += value;
+      this.expression += value;
     }
+
+    this.drawExpression();
   },
 
   /**
    * Toggles the sign of the current number on the display.
    */
   toggleSign() {
-    if (this.display.value !== "0" && this.display.value !== "Error") {
-      if (this.display.value.startsWith("-")) {
-        this.display.value = this.display.value.slice(1);
+    if (this.expression !== "0" && this.expression !== "Error") {
+      if (this.expression.startsWith("-")) {
+        this.expression = this.expression.slice(1);
       } else {
-        this.display.value = "-" + this.display.value;
+        this.expression = "-" + this.expression;
       }
     }
+
+    this.drawExpression();
   },
 
   isDotAllowed() {
-    const lastNumber = this.display.value.split(/[\+\-\*\/]/).pop();
+    const lastNumber = this.expression.split(/[\+\-\*\/]/).pop();
     return !lastNumber.includes(".") && !isNaN(lastNumber);
   },
 };

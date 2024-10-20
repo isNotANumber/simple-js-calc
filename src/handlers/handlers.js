@@ -27,19 +27,19 @@ function handleKeyDown(e) {
       break;
     case "Delete":
     case "Escape":
-      Calc.clearDisplay();
+      Calc.clearExpression();
       break;
     case "Backspace":
       Calc.deleteLastChar();
       break;
     case ".":
       if (Calc.isDotAllowed()) {
-        Calc.appendToDisplay(e.key);
+        Calc.appendToExpression(e.key);
       }
       break;
     default:
       if (isValidChar(e.key)) {
-        Calc.appendToDisplay(e.key);
+        Calc.appendToExpression(e.key);
       }
       break;
   }
@@ -54,7 +54,7 @@ function handleButtonClick(e) {
 
   switch (value) {
     case "AC":
-      Calc.clearDisplay();
+      Calc.clearExpression();
       break;
     case "⌫":
       Calc.deleteLastChar();
@@ -64,14 +64,14 @@ function handleButtonClick(e) {
       break;
     case ".":
       if (Calc.isDotAllowed()) {
-        Calc.appendToDisplay(value);
+        Calc.appendToExpression(value);
       }
       break;
     case "+/-":
       Calc.toggleSign();
       break;
     default:
-      Calc.appendToDisplay(value);
+      Calc.appendToExpression(value);
       break;
   }
 }
