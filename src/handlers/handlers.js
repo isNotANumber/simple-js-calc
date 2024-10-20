@@ -1,12 +1,7 @@
-// import {
-//   clearDisplay,
-//   deleteLastChar,
-//   calculateResult,
-//   appendToDisplay,
-//   toggleSign,
-// } from "../operations/operations.js";
 import { isValidChar } from "../util/util.js";
-import { Calc } from "../calc/calc.js";
+import Calculator from "../calculator/calculator.js";
+
+const calculator = new Calculator();
 
 /**
  * Toggles the theme between light and dark.
@@ -23,23 +18,23 @@ function handleThemeToggle() {
 function handleKeyDown(e) {
   switch (e.key) {
     case "Enter":
-      Calc.calculateResult();
+      calculator.calculateResult();
       break;
     case "Delete":
     case "Escape":
-      Calc.clearExpression();
+      calculator.clearExpression();
       break;
     case "Backspace":
-      Calc.deleteLastChar();
+      calculator.deleteLastChar();
       break;
     case ".":
-      if (Calc.isDotAllowed()) {
-        Calc.appendToExpression(e.key);
+      if (calculator.isDotAllowed()) {
+        calculator.appendToExpression(e.key);
       }
       break;
     default:
       if (isValidChar(e.key)) {
-        Calc.appendToExpression(e.key);
+        calculator.appendToExpression(e.key);
       }
       break;
   }
@@ -54,24 +49,24 @@ function handleButtonClick(e) {
 
   switch (value) {
     case "AC":
-      Calc.clearExpression();
+      calculator.clearExpression();
       break;
     case "⌫":
-      Calc.deleteLastChar();
+      calculator.deleteLastChar();
       break;
     case "=":
-      Calc.calculateResult();
+      calculator.calculateResult();
       break;
     case ".":
-      if (Calc.isDotAllowed()) {
-        Calc.appendToExpression(value);
+      if (calculator.isDotAllowed()) {
+        calculator.appendToExpression(value);
       }
       break;
     case "+/-":
-      Calc.toggleSign();
+      calculator.toggleSign();
       break;
     default:
-      Calc.appendToExpression(value);
+      calculator.appendToExpression(value);
       break;
   }
 }

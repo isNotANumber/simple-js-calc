@@ -1,16 +1,16 @@
-import { displayElement } from "../const/elements";
+import { displayElement } from "../const/elements.js";
 import { isDot, isOperator, isNumber, isOperatorInExpression } from "../util/util.js";
 
-const Calc = {
-  expression: '0',
-  display: displayElement,
+export default class Calculator {
+  expression = '0';
+  display = displayElement;
 
   /**
    * Displays the expression on the calculator display.
    */
   drawExpression() {
     this.display.value = this.expression;
-  },
+  };
 
   /**
    * Clears the display.
@@ -18,7 +18,7 @@ const Calc = {
   clearExpression() {
     this.expression = "0";
     this.drawExpression();
-  },
+  };
 
   /**
    * Deletes the last character from the display.
@@ -26,7 +26,7 @@ const Calc = {
   deleteLastChar() {
     this.expression= this.expression.slice(0, -1) || "0";
     this.drawExpression();
-  },
+  };
 
   /**
    * Calculates the result of the expression on the display.
@@ -39,7 +39,7 @@ const Calc = {
     }
 
     this.drawExpression();
-  },
+  };
 
   /**
    * Appends a value to the calc expression.
@@ -65,7 +65,7 @@ const Calc = {
     }
 
     this.drawExpression();
-  },
+  };
 
   /**
    * Toggles the sign of the current number on the display.
@@ -80,12 +80,10 @@ const Calc = {
     }
 
     this.drawExpression();
-  },
+  };
 
   isDotAllowed() {
     const lastNumber = this.expression.split(/[\+\-\*\/]/).pop();
     return !lastNumber.includes(".") && !isNaN(lastNumber);
-  },
+  };
 };
-
-export {Calc}
