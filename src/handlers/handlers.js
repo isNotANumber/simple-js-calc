@@ -1,11 +1,12 @@
-import {
-  clearDisplay,
-  deleteLastChar,
-  calculateResult,
-  appendToDisplay,
-  toggleSign,
-} from "../operations/operations.js";
-import { isDotAllowed, isValidChar } from "../util/util.js";
+// import {
+//   clearDisplay,
+//   deleteLastChar,
+//   calculateResult,
+//   appendToDisplay,
+//   toggleSign,
+// } from "../operations/operations.js";
+import { isValidChar } from "../util/util.js";
+import { Calc } from "../calc/calc.js";
 
 /**
  * Toggles the theme between light and dark.
@@ -22,23 +23,23 @@ function handleThemeToggle() {
 function handleKeyDown(e) {
   switch (e.key) {
     case "Enter":
-      calculateResult();
+      Calc.calculateResult();
       break;
     case "Delete":
     case "Escape":
-      clearDisplay();
+      Calc.clearDisplay();
       break;
     case "Backspace":
-      deleteLastChar();
+      Calc.deleteLastChar();
       break;
     case ".":
-      if (isDotAllowed()) {
-        appendToDisplay(e.key);
+      if (Calc.isDotAllowed()) {
+        Calc.appendToDisplay(e.key);
       }
       break;
     default:
       if (isValidChar(e.key)) {
-        appendToDisplay(e.key);
+        Calc.appendToDisplay(e.key);
       }
       break;
   }
@@ -53,24 +54,24 @@ function handleButtonClick(e) {
 
   switch (value) {
     case "AC":
-      clearDisplay();
+      Calc.clearDisplay();
       break;
     case "⌫":
-      deleteLastChar();
+      Calc.deleteLastChar();
       break;
     case "=":
-      calculateResult();
+      Calc.calculateResult();
       break;
     case ".":
-      if (isDotAllowed()) {
-        appendToDisplay(value);
+      if (Calc.isDotAllowed()) {
+        Calc.appendToDisplay(value);
       }
       break;
     case "+/-":
-      toggleSign();
+      Calc.toggleSign();
       break;
     default:
-      appendToDisplay(value);
+      Calc.appendToDisplay(value);
       break;
   }
 }

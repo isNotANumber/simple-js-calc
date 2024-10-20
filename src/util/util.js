@@ -1,14 +1,14 @@
-import { display } from "../const/elements.js";
+// import { displayElement } from "../const/elements.js";
 import { validChars, operators } from "../const/const.js";
 
 /**
 * Checks if a dot is allowed in the current number.
 * @returns {boolean} - True if a dot is allowed, false otherwise.
 */
-function isDotAllowed() {
-  const lastNumber = display.value.split(/[\+\-\*\/]/).pop();
-  return !lastNumber.includes('.') && !isNaN(lastNumber);
-}
+// function isDotAllowed() {
+//   const lastNumber = displayElement.value.split(/[\+\-\*\/]/).pop();
+//   return !lastNumber.includes('.') && !isNaN(lastNumber);
+// }
 
 /**
 * Checks if a character is valid.
@@ -56,4 +56,4 @@ function isNumber(char) {
   return char >= '0' && char <= '9';
 }
 
-export { isDotAllowed, isValidChar, isDot, isOperator, isNumber, isOperatorInExpression }
+export { isValidChar, isDot, isOperator, isNumber, isOperatorInExpression }

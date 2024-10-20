@@ -1,7 +1,7 @@
 /**
  * Calculator display element.
  */
-const display = document.querySelector(".calculator__display");
+const displayElement = document.querySelector(".calculator__display");
 
 /**
  * Calculator main buttons container element.
@@ -13,4 +13,4 @@ const buttonsContainer = document.querySelector(".calculator__buttons");
  */
 const themeToggleButton = document.querySelector(".theme-toggle");
 
-export {display, buttonsContainer, themeToggleButton}
+export {displayElement, buttonsContainer, themeToggleButton}
