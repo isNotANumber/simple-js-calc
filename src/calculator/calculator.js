@@ -1,5 +1,6 @@
 import { displayElement } from "../const/elements.js";
-import { isDot, isOperator, isNumber, isOperatorInExpression } from "../util/util.js";
+import { isDot, isOperator, isNumber, isOperatorInExpression, parseExpression } from "../util/util.js";
+import { OPERATIONS } from "../operations/operations.js";
 
 export default class Calculator {
   expression = '0';
@@ -32,11 +33,21 @@ export default class Calculator {
    * Calculates the result of the expression on the display.
    */
   calculateResult() {
-    try {
-      this.expression = String(eval(this.expression));
-    } catch {
-      this.expression = "Error";
+    console.log(parseExpression(this.expression));
+
+    const [firstOperand, secondOperand, operator] = parseExpression(this.expression);
+
+    if (!secondOperand) {
+      this.expression = String(firstOperand);
+    } else {
+      this.expression = String(OPERATIONS[operator](firstOperand, secondOperand));
     }
+
+    // try {
+    //   this.expression = String(eval(this.expression));
+    // } catch {
+    //   this.expression = "Error";
+    // }
 
     this.drawExpression();
   };

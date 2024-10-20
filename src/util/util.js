@@ -56,4 +56,24 @@ function isNumber(char) {
   return char >= '0' && char <= '9';
 }
 
-export { isValidChar, isDot, isOperator, isNumber, isOperatorInExpression }
+function parseExpression(expression) {
+  let firstOperand = '';
+  let secondOperand = '';
+  let operator = '';
+
+  for (const char of expression) {
+    if (isNumber(char) || isDot(char)) {
+      if (!operator) {
+        firstOperand += char;
+      } else {
+        secondOperand += char;
+      }
+    } else {
+      operator = char;
+    }
+  }
+
+  return [Number(firstOperand), Number(secondOperand), operator];
+}
+
+export { isValidChar, isDot, isOperator, isNumber, isOperatorInExpression, parseExpression }
