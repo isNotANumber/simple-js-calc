@@ -46,7 +46,7 @@ function handleKeyDown(e) {
 
 /**
  * Handles button click events.
- * @param {MouseEvent} e - The click event.
+ * @param {PointerEvent} e - The click event.
  */
 function handleButtonClick(e) {
   const value = e.target.textContent;
@@ -75,4 +75,16 @@ function handleButtonClick(e) {
   }
 }
 
-export { handleThemeToggle, handleKeyDown, handleButtonClick };
+/**
+ * General calc handler for mouse and keyboard events.
+ * @param {PointerEvent|KeyboardEvent} e
+ */
+function handleKeyboardEvent(e) {
+  if (e instanceof PointerEvent) {
+    handleButtonClick(e);
+  } else {
+    handleKeyDown(e);
+  }
+}
+
+export { handleThemeToggle, handleKeyboardEvent };
