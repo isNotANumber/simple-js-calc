@@ -76,7 +76,7 @@ function handleButtonClick(e) {
 }
 
 /**
- * General calc handler for mouse and keyboard events.
+ * General calc keyboard handler for click and keydown events.
  * @param {PointerEvent|KeyboardEvent} e
  */
 function handleKeyboardEvent(e) {
