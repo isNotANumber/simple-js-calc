@@ -24,12 +24,7 @@ body {
   };
 
   &__header-item {
-    cursor: not-allowed;
-    transition: color 0.3s;
-  };
-
-  &__header-item_active {
-    cursor: pointer;
+    cursor: default;
   };
 
   &__display {

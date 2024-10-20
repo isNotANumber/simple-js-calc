@@ -8,10 +8,6 @@
   .calculator {
     &__header-item {
       color: getDarkThemeKey('header-item');
-
-      &_active {
-        color: getDarkThemeKey('header-item-active');
-      };
     };
 
     &__display {
