@@ -1,5 +1,5 @@
 import { displayElement } from "../const/elements.js";
-import { isDot, isOperator, isNumber, isOperatorInExpression, parseExpression } from "../util/util.js";
+import { isDot, isOperator, isNumber, isOperatorInExpression } from "../util/util.js";
 import { OPERATIONS } from "../operations/operations.js";
 
 export default class Calculator {
@@ -7,10 +7,26 @@ export default class Calculator {
   display = displayElement;
 
   /**
+   * Parse current expression.
+   * @returns operands and operator.
+   */
+  parseExpression() {
+    const operator = this.expression.match(/[\+\-\*\/]/g);
+    const operands = this.expression.split(operator);
+
+    if (operator) {
+      return [...operands, ...operator];
+    } else {
+      return [...operands];
+    }
+  }
+
+  /**
    * Displays the expression on the calculator display.
    */
   drawExpression() {
-    this.display.value = this.expression;
+    const expressionToDisplay = this.expression.replaceAll('neg', '-');
+    this.display.value = expressionToDisplay;
   };
 
   /**
@@ -33,21 +49,19 @@ export default class Calculator {
    * Calculates the result of the expression on the display.
    */
   calculateResult() {
-    console.log(parseExpression(this.expression));
-
-    const [firstOperand, secondOperand, operator] = parseExpression(this.expression);
+    let [firstOperand, secondOperand, operator] = this.parseExpression();
+    let result = '';
 
     if (!secondOperand) {
-      this.expression = String(firstOperand);
+      firstOperand = firstOperand.includes('neg') ? firstOperand.replace('neg', '-') : firstOperand;
+      result = firstOperand;
     } else {
-      this.expression = String(OPERATIONS[operator](firstOperand, secondOperand));
+      firstOperand = firstOperand.includes('neg') ? firstOperand.replace('neg', '-') : firstOperand;
+      secondOperand = secondOperand.includes('neg') ? secondOperand.replace('neg', '-') : secondOperand;
+      result = String(OPERATIONS[operator](Number(firstOperand), Number(secondOperand)));
     }
 
-    // try {
-    //   this.expression = String(eval(this.expression));
-    // } catch {
-    //   this.expression = "Error";
-    // }
+    this.expression = result.replaceAll('-', 'neg');
 
     this.drawExpression();
   };
@@ -82,19 +96,24 @@ export default class Calculator {
    * Toggles the sign of the current number on the display.
    */
   toggleSign() {
-    if (this.expression !== "0" && this.expression !== "Error") {
-      if (this.expression.startsWith("-")) {
-        this.expression = this.expression.slice(1);
-      } else {
-        this.expression = "-" + this.expression;
-      }
+    let [firstOperand, secondOperand, operator] = this.parseExpression();
+
+    if (firstOperand === '0') {
+      return;
+    }
+
+    if (!secondOperand) {
+      firstOperand = firstOperand.includes('neg') ? firstOperand.slice(3) : 'neg' + firstOperand;
+    } else {
+      secondOperand = secondOperand.includes('neg') ? secondOperand.slice(3) : 'neg' + secondOperand;
+    }
+
+    if (operator) {
+      this.expression = firstOperand + operator + secondOperand;
+    } else {
+      this.expression = firstOperand;
     }
 
     this.drawExpression();
-  };
-
-  isDotAllowed() {
-    const lastNumber = this.expression.split(/[\+\-\*\/]/).pop();
-    return !lastNumber.includes(".") && !isNaN(lastNumber);
   };
 };

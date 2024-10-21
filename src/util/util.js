@@ -1,14 +1,4 @@
-// import { displayElement } from "../const/elements.js";
 import { validChars, operators } from "../const/const.js";
-
-/**
-* Checks if a dot is allowed in the current number.
-* @returns {boolean} - True if a dot is allowed, false otherwise.
-*/
-// function isDotAllowed() {
-//   const lastNumber = displayElement.value.split(/[\+\-\*\/]/).pop();
-//   return !lastNumber.includes('.') && !isNaN(lastNumber);
-// }
 
 /**
 * Checks if a character is valid.
@@ -56,24 +46,13 @@ function isNumber(char) {
   return char >= '0' && char <= '9';
 }
 
-function parseExpression(expression) {
-  let firstOperand = '';
-  let secondOperand = '';
-  let operator = '';
+/**
+ * Checks if dot allowed to append to number.
+ * @param {expression} - current calc expression.
+ */
+function isDotAllowed(expression) {
+  const lastNumber = expression.split(/[\+\-\*\/]/).pop();
+  return !lastNumber.includes(".") && !isNaN(lastNumber);
+};
 
-  for (const char of expression) {
-    if (isNumber(char) || isDot(char)) {
-      if (!operator) {
-        firstOperand += char;
-      } else {
-        secondOperand += char;
-      }
-    } else {
-      operator = char;
-    }
-  }
-
-  return [Number(firstOperand), Number(secondOperand), operator];
-}
-
-export { isValidChar, isDot, isOperator, isNumber, isOperatorInExpression, parseExpression }
+export { isValidChar, isDot, isOperator, isNumber, isOperatorInExpression, isDotAllowed }

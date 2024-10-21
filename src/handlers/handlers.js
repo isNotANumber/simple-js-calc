@@ -1,4 +1,4 @@
-import { isValidChar } from "../util/util.js";
+import { isValidChar, isDotAllowed } from "../util/util.js";
 import Calculator from "../calculator/calculator.js";
 
 const calculator = new Calculator();
@@ -28,7 +28,7 @@ function handleKeyDown(e) {
       calculator.deleteLastChar();
       break;
     case ".":
-      if (calculator.isDotAllowed()) {
+      if (isDotAllowed(calculator.expression)) {
         calculator.appendToExpression(e.key);
       }
       break;
