@@ -77,7 +77,7 @@ function handleButtonClick(e) {
  * General calc keyboard handler for click and keydown events.
  * @param {PointerEvent|KeyboardEvent} e
  */
-function handleKeyboardEvent(e) {
+function handleCalcKeyboardEvent(e) {
   if (e instanceof PointerEvent) {
     handleButtonClick(e);
   } else {
@@ -85,4 +85,4 @@ function handleKeyboardEvent(e) {
   }
 }
 
-export { handleThemeToggle, handleKeyboardEvent };
+export { handleThemeToggle, handleCalcKeyboardEvent };
