@@ -45,7 +45,7 @@ function handleKeyDown(e) {
  * @param {PointerEvent} e - The click event.
  */
 function handleButtonClick(e) {
-  const value = e.target.textContent;
+  const value = e.target.dataset.keyValue;
 
   switch (value) {
     case "AC":
@@ -66,7 +66,6 @@ function handleButtonClick(e) {
       calculator.toggleSign();
       break;
     default:
-      console.log(value)
       if (isValidChar(value)) {
         calculator.updateExpression(value);
       }
