@@ -29,12 +29,12 @@ function handleKeyDown(e) {
       break;
     case ".":
       if (isDotAllowed(calculator.expression)) {
-        calculator.appendToExpression(e.key);
+        calculator.updateExpression(e.key);
       }
       break;
     default:
       if (isValidChar(e.key)) {
-        calculator.appendToExpression(e.key);
+        calculator.updateExpression(e.key);
       }
       break;
   }
@@ -59,15 +59,15 @@ function handleButtonClick(e) {
       break;
     case ".":
       if (calculator.isDotAllowed()) {
-        calculator.appendToExpression(value);
+        calculator.updateExpression(value);
       }
       break;
     case "+/-":
       calculator.toggleSign();
       break;
     default:
-      if (isValidChar(e.key)) {
-        calculator.appendToExpression(value);
+      if (isValidChar(value)) {
+        calculator.updateExpression(value);
       }
       break;
   }

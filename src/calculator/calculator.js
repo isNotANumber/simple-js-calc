@@ -1,10 +1,12 @@
-import { displayElement } from "../const/elements.js";
 import { isDot, isOperator, isNumber, isOperatorInExpression } from "../util/util.js";
 import { OPERATIONS } from "../operations/operations.js";
+import { writeToDisplay } from "../display/display.js";
 
 export default class Calculator {
-  expression = '0';
-  display = displayElement;
+
+  constructor() {
+    this.expression = '0';
+  }
 
   /**
    * Parse current expression.
@@ -22,31 +24,23 @@ export default class Calculator {
   }
 
   /**
-   * Displays the expression on the calculator display.
-   */
-  drawExpression() {
-    const expressionToDisplay = this.expression.replaceAll('neg', '-');
-    this.display.value = expressionToDisplay;
-  };
-
-  /**
-   * Clears the display.
+   * Clears the expression.
    */
   clearExpression() {
     this.expression = "0";
-    this.drawExpression();
+    writeToDisplay(this.expression);
   };
 
   /**
-   * Deletes the last character from the display.
+   * Deletes the last character from the expression.
    */
   deleteLastChar() {
     this.expression= this.expression.slice(0, -1) || "0";
-    this.drawExpression();
+    writeToDisplay(this.expression);
   };
 
   /**
-   * Calculates the result of the expression on the display.
+   * Calculates the result of the expression on the expression.
    */
   calculateResult() {
     let [firstOperand, secondOperand, operator] = this.parseExpression();
@@ -63,14 +57,14 @@ export default class Calculator {
 
     this.expression = result.replaceAll('-', 'neg');
 
-    this.drawExpression();
+    writeToDisplay(this.expression);
   };
 
   /**
    * Appends a value to the calc expression.
    * @param {string} value - The value to append.
    */
-  appendToExpression(value) {
+  updateExpression(value) {
     const lastChar = this.expression.slice(-1);
 
     if (isNumber(value) && this.expression === "0") {
@@ -89,11 +83,11 @@ export default class Calculator {
       this.expression += value;
     }
 
-    this.drawExpression();
+    writeToDisplay(this.expression);
   };
 
   /**
-   * Toggles the sign of the current number on the display.
+   * Toggles the sign of the current number on the expression.
    */
   toggleSign() {
     let [firstOperand, secondOperand, operator] = this.parseExpression();
@@ -114,6 +108,6 @@ export default class Calculator {
       this.expression = firstOperand;
     }
 
-    this.drawExpression();
+    writeToDisplay(this.expression);
   };
 };
