@@ -1,4 +1,4 @@
-import { operatorsRegExp, validCharsRegexp } from "../const/const.js";
+import { operatorsRegex, validCharsRegex } from "../const/const.js";
 
 /**
  * Checks if a character is valid.
@@ -6,7 +6,7 @@ import { operatorsRegExp, validCharsRegexp } from "../const/const.js";
  * @returns {boolean} - True if the character is valid, false otherwise.
  */
 function isValidChar(char) {
-  return validCharsRegexp.test(char);
+  return validCharsRegex.test(char);
 }
 
 /**
@@ -22,7 +22,7 @@ function isDot(char) {
  * @param {string} char - The character to check.
  */
 function isOperator(char) {
-  return operatorsRegExp.test(char);
+  return operatorsRegex.test(char);
 }
 
 /**
@@ -30,7 +30,7 @@ function isOperator(char) {
  * @param {string} expression - Current displayed expression.
  */
 function isOperatorInExpression(expression) {
-  return operatorsRegExp.test(expression);
+  return operatorsRegex.test(expression);
 }
 
 /**

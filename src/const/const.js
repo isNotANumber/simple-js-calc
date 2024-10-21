@@ -1,11 +1,18 @@
 /**
  * Allowed operators regular expression.
  */
-const operatorsRegExp = /[\+\-\*\%\/]/;
+const operatorsRegex = /[\+\-\*\%\/]/;
 
 /**
  * Allowed chars to input from keyboard regular expression.
  */
-const validCharsRegexp = new RegExp(/^[\d]/.source + "|" + operatorsRegExp.source);
+const validCharsRegex = new RegExp(
+  /^[\d]/.source + "|" + operatorsRegex.source
+);
 
-export { operatorsRegExp, validCharsRegexp}
+/**
+ * Negative number regular expression.S
+ */
+const negNumberRegex = /neg\d$/;
+
+export { operatorsRegex, validCharsRegex, negNumberRegex };

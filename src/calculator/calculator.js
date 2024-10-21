@@ -7,6 +7,7 @@ import {
 } from "../util/util.js";
 import { OPERATIONS } from "../operations/operations.js";
 import { writeToDisplay } from "../display/display.js";
+import { operatorsRegex, negNumberRegex } from "../const/const.js";
 
 export default class Calculator {
   expression = "0";
@@ -16,7 +17,7 @@ export default class Calculator {
    * @returns operands and operator.
    */
   parseExpression() {
-    const operator = this.expression.match(/[\+\-\*\%\/]/g);
+    const operator = this.expression.match(operatorsRegex);
     const operands = this.expression.split(operator);
 
     if (operator) {
@@ -38,7 +39,11 @@ export default class Calculator {
    * Deletes the last character from the expression.
    */
   deleteLastChar() {
-    this.expression = this.expression.slice(0, -1) || "0";
+    if (negNumberRegex.test(this.expression)) {
+      this.expression = this.expression.replace(negNumberRegex, "0");
+    } else {
+      this.expression = this.expression.slice(0, -1) || "0";
+    }
     writeToDisplay(this.expression);
   }
 
@@ -57,7 +62,7 @@ export default class Calculator {
       );
       this.expression = String(
         OPERATIONS[operator](Number(firstOperand), Number(secondOperand))
-      ).replaceAll('-', 'neg');
+      ).replaceAll("-", "neg");
     } else {
       this.expression = firstOperand;
     }
