@@ -66,7 +66,9 @@ function handleButtonClick(e) {
       calculator.toggleSign();
       break;
     default:
-      calculator.appendToExpression(value);
+      if (isValidChar(e.key)) {
+        calculator.appendToExpression(value);
+      }
       break;
   }
 }
