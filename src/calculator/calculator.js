@@ -9,22 +9,14 @@ import { OPERATIONS } from "../operations/operations.js";
 import { writeToDisplay } from "../display/display.js";
 
 export default class Calculator {
-  #expression = "0";
-
-  get expression() {
-    return this.#expression;
-  }
-
-  set expression(value) {
-    this.#expression = value;
-  }
+  expression = "0";
 
   /**
    * Parse current expression.
    * @returns operands and operator.
    */
   parseExpression() {
-    const operator = this.expression.match(/[\+\-\*\/]/g);
+    const operator = this.expression.match(/[\+\-\*\%\/]/g);
     const operands = this.expression.split(operator);
 
     if (operator) {
@@ -63,7 +55,6 @@ export default class Calculator {
         firstOperand,
         secondOperand
       );
-      console.log(operator, firstOperand, secondOperand)
       this.expression = String(
         OPERATIONS[operator](Number(firstOperand), Number(secondOperand))
       ).replaceAll('-', 'neg');

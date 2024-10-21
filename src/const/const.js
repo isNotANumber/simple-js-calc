@@ -1,11 +1,11 @@
 /**
- * Allowed operators.
+ * Allowed operators regular expression.
  */
-const operators = ["+", "-", "*", "/", "%"];
+const operatorsRegExp = /[\+\-\*\%\/]/;
 
 /**
- * Allowed chars to input from keyboard.
+ * Allowed chars to input from keyboard regular expression.
  */
-const validChars = '0123456789+-*/.%';
+const validCharsRegexp = new RegExp(/[\d]/.source + "|" + operatorsRegExp.source);
 
-export {operators, validChars}
+export { operatorsRegExp, validCharsRegexp}

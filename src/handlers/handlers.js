@@ -66,6 +66,7 @@ function handleButtonClick(e) {
       calculator.toggleSign();
       break;
     default:
+      console.log(value)
       if (isValidChar(value)) {
         calculator.updateExpression(value);
       }
