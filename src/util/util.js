@@ -46,7 +46,7 @@ function isNumber(char) {
  * @param {expression} - current calc expression.
  */
 function isDotAllowed(expression) {
-  const lastNumber = expression.split(/[\+\-\*\%\/]/).pop();
+  const lastNumber = expression.split(operatorsRegex).pop();
   return !lastNumber.includes(".");
 }
 
