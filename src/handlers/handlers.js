@@ -58,7 +58,7 @@ function handleButtonClick(e) {
       calculator.calculateResult();
       break;
     case ".":
-      if (calculator.isDotAllowed()) {
+      if (isDotAllowed(calculator.expression)) {
         calculator.updateExpression(value);
       }
       break;

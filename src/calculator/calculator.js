@@ -1,11 +1,22 @@
-import { isDot, isOperator, isNumber, isOperatorInExpression } from "../util/util.js";
+import {
+  isDot,
+  isOperator,
+  isNumber,
+  isOperatorInExpression,
+  replaceInOperands,
+} from "../util/util.js";
 import { OPERATIONS } from "../operations/operations.js";
 import { writeToDisplay } from "../display/display.js";
 
 export default class Calculator {
+  #expression = "0";
 
-  constructor() {
-    this.expression = '0';
+  get expression() {
+    return this.#expression;
+  }
+
+  set expression(value) {
+    this.#expression = value;
   }
 
   /**
@@ -29,36 +40,39 @@ export default class Calculator {
   clearExpression() {
     this.expression = "0";
     writeToDisplay(this.expression);
-  };
+  }
 
   /**
    * Deletes the last character from the expression.
    */
   deleteLastChar() {
-    this.expression= this.expression.slice(0, -1) || "0";
+    this.expression = this.expression.slice(0, -1) || "0";
     writeToDisplay(this.expression);
-  };
+  }
 
   /**
    * Calculates the result of the expression on the expression.
    */
   calculateResult() {
     let [firstOperand, secondOperand, operator] = this.parseExpression();
-    let result = '';
 
-    if (!secondOperand) {
-      firstOperand = firstOperand.includes('neg') ? firstOperand.replace('neg', '-') : firstOperand;
-      result = firstOperand;
+    if (secondOperand) {
+      [firstOperand, secondOperand] = replaceInOperands(
+        "neg",
+        "-",
+        firstOperand,
+        secondOperand
+      );
+      console.log(operator, firstOperand, secondOperand)
+      this.expression = String(
+        OPERATIONS[operator](Number(firstOperand), Number(secondOperand))
+      ).replaceAll('-', 'neg');
     } else {
-      firstOperand = firstOperand.includes('neg') ? firstOperand.replace('neg', '-') : firstOperand;
-      secondOperand = secondOperand.includes('neg') ? secondOperand.replace('neg', '-') : secondOperand;
-      result = String(OPERATIONS[operator](Number(firstOperand), Number(secondOperand)));
+      this.expression = firstOperand;
     }
 
-    this.expression = result.replaceAll('-', 'neg');
-
     writeToDisplay(this.expression);
-  };
+  }
 
   /**
    * Appends a value to the calc expression.
@@ -71,10 +85,7 @@ export default class Calculator {
       this.expression = value;
     } else if (isOperator(value) && isOperator(lastChar)) {
       this.expression = this.expression.slice(0, -1) + value;
-    } else if (
-      isOperator(value) &&
-      isOperatorInExpression(this.expression)
-    ) {
+    } else if (isOperator(value) && isOperatorInExpression(this.expression)) {
       this.calculateResult();
       this.expression += value;
     } else if (isDot(value) && isOperator(lastChar)) {
@@ -84,7 +95,7 @@ export default class Calculator {
     }
 
     writeToDisplay(this.expression);
-  };
+  }
 
   /**
    * Toggles the sign of the current number on the expression.
@@ -92,14 +103,18 @@ export default class Calculator {
   toggleSign() {
     let [firstOperand, secondOperand, operator] = this.parseExpression();
 
-    if (firstOperand === '0') {
+    if (firstOperand === "0") {
       return;
     }
 
     if (!secondOperand) {
-      firstOperand = firstOperand.includes('neg') ? firstOperand.slice(3) : 'neg' + firstOperand;
+      firstOperand = firstOperand.includes("neg")
+        ? firstOperand.slice(3)
+        : "neg" + firstOperand;
     } else {
-      secondOperand = secondOperand.includes('neg') ? secondOperand.slice(3) : 'neg' + secondOperand;
+      secondOperand = secondOperand.includes("neg")
+        ? secondOperand.slice(3)
+        : "neg" + secondOperand;
     }
 
     if (operator) {
@@ -109,5 +124,5 @@ export default class Calculator {
     }
 
     writeToDisplay(this.expression);
-  };
-};
+  }
+}

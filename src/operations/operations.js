@@ -5,11 +5,11 @@ const divide = (a, b) => a / b;
 const divideWithRemainder = (a, b) => a % b;
 
 const OPERATIONS = {
-  '+': sum,
-  '-': minus,
-  '*': multiply,
-  '/': divide,
-  '%': divideWithRemainder,
+  "+": sum,
+  "-": minus,
+  "*": multiply,
+  "/": divide,
+  "%": divideWithRemainder,
 };
 
-export { OPERATIONS }
+export { OPERATIONS };

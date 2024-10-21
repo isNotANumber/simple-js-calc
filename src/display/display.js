@@ -5,8 +5,8 @@ import { displayElement } from "../const/elements.js";
  * @param {string} expression - calc expression.
  */
 function writeToDisplay(expression) {
-  const expressionToDisplay = expression.replaceAll('neg', '-');
+  const expressionToDisplay = expression.replaceAll("neg", "-");
   displayElement.value = expressionToDisplay;
-};
+}
 
-export {writeToDisplay}
+export { writeToDisplay };

@@ -13,4 +13,4 @@ const buttonsContainer = document.querySelector(".calculator__buttons");
  */
 const themeToggleButton = document.querySelector(".theme-toggle");
 
-export {displayElement, buttonsContainer, themeToggleButton}
+export { displayElement, buttonsContainer, themeToggleButton };
