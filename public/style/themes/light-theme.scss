@@ -33,10 +33,10 @@
           background-color: getLightThemeKey('button-orange-hover-background');
         };
       };
+
+      &_theme {
+        color: getLightThemeKey('button_theme');
+      };
     }
   }
-
-  .theme-toggle {
-    color: getLightThemeKey('theme-toggle');
-  };
 }

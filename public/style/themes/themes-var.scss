@@ -9,7 +9,7 @@ $dark-theme-colors: (
   'button-orange-background': #ff8c42,
   'button-orange': white,
   'button-orange-hover-background': #ff9c52,
-  'theme-toggle': white,
+  'button_theme': white,
 );
 
 $light-theme-colors: (
@@ -23,7 +23,7 @@ $light-theme-colors: (
   'button-orange-background': #ff8c42,
   'button-orange': white,
   'button-orange-hover-background': #ff9c52,
-  'theme-toggle': black,
+  'button_theme': black,
 );
 
 @function getDarkThemeKey($key) {

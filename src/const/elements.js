@@ -11,6 +11,6 @@ const calcButtons = document.getElementById("calculator__buttons");
 /**
  * Light/Dark theme toggle element.
  */
-const calcButtonTheme = document.getElementById("calculator__theme-toggle");
+const calcButtonTheme = document.getElementById("calculator__button_theme");
 
 export { calcDisplay, calcButtons, calcButtonTheme };
