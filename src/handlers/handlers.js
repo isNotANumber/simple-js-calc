@@ -1,6 +1,10 @@
-import Calculator from "../calculator/calculator.js";
-
-const calculator = new Calculator();
+import {
+  calculateResult,
+  clearExpression,
+  deleteLastChar,
+  updateExpression,
+  toggleSign,
+} from "../calculator/calculator.js";
 
 /**
  * Toggles the theme between light and dark.
@@ -18,17 +22,17 @@ function handleKeyDown(e) {
 
   switch (value) {
     case "Enter":
-      calculator.calculateResult();
+      calculateResult();
       break;
     case "Delete":
     case "Escape":
-      calculator.clearExpression();
+      clearExpression();
       break;
     case "Backspace":
-      calculator.deleteLastChar();
+      deleteLastChar();
       break;
     default:
-      calculator.updateExpression(value);
+      updateExpression(value);
       break;
   }
 }
@@ -42,19 +46,19 @@ function handleButtonClick(e) {
 
   switch (value) {
     case "AC":
-      calculator.clearExpression();
+      clearExpression();
       break;
     case "⌫":
-      calculator.deleteLastChar();
+      deleteLastChar();
       break;
     case "=":
-      calculator.calculateResult();
+      calculateResult();
       break;
     case "+/-":
-      calculator.toggleSign();
+      toggleSign();
       break;
     default:
-      calculator.updateExpression(value);
+      updateExpression(value);
       break;
   }
 }

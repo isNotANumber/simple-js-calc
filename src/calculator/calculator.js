@@ -11,114 +11,122 @@ import { OPERATIONS } from "../operations/operations.js";
 import { writeToDisplay } from "../display/display.js";
 import { operatorsRegex, negNumberRegex } from "../const/const.js";
 
-export default class Calculator {
-  expression = "0";
+const calcStore = {
+  expression: "0",
+};
 
-  /**
-   * Parse current expression.
-   * @returns operands and operator.
-   */
-  parseExpression() {
-    const operator = this.expression.match(operatorsRegex);
-    const operands = this.expression.split(operator);
+/**
+ * Parse current expression.
+ * @returns operands and operator.
+ */
+function parseExpression() {
+  const operator = calcStore.expression.match(operatorsRegex);
+  const operands = calcStore.expression.split(operator);
 
-    return operator ? [...operands, ...operator] : [...operands]
-  }
-
-  /**
-   * Clears the expression.
-   */
-  clearExpression() {
-    this.expression = "0";
-    writeToDisplay(this.expression);
-  }
-
-  /**
-   * Deletes the last character from the expression.
-   */
-  deleteLastChar() {
-    this.expression = negNumberRegex.test(this.expression) ?
-    this.expression.replace(negNumberRegex, "0") :
-    this.expression.slice(0, -1) || "0";
-
-    writeToDisplay(this.expression);
-  }
-
-  /**
-   * Calculates the result of the expression on the expression.
-   */
-  calculateResult() {
-    let [firstOperand, secondOperand, operator] = this.parseExpression();
-
-    if (secondOperand) {
-      [firstOperand, secondOperand] = replaceInOperands(
-        "neg",
-        "-",
-        firstOperand,
-        secondOperand
-      );
-      this.expression = String(
-        OPERATIONS[operator](Number(firstOperand), Number(secondOperand))
-      ).replaceAll("-", "neg");
-    } else {
-      this.expression = firstOperand;
-    }
-
-    writeToDisplay(this.expression);
-  }
-
-  /**
-   * Appends a value to the calc expression.
-   * @param {string} value - The value to append.
-   */
-  updateExpression(value) {
-    const lastChar = this.expression.slice(-1);
-
-    if (isDot(value) && isDotAllowed(this.expression)) {
-      this.expression += isOperator(lastChar) ? "0." : value;
-    }
-
-    if (isValidChar(value)) {
-      if (isNumber(value) && this.expression === "0") {
-        this.expression = value;
-      } else if (isOperator(value) && isOperator(lastChar)) {
-        this.expression = this.expression.slice(0, -1) + value;
-      } else if (isOperator(value) && isOperatorInExpression(this.expression)) {
-        this.calculateResult();
-        this.expression += value;
-      }
-      else {
-        this.expression += value;
-      }
-    }
-
-    writeToDisplay(this.expression);
-  }
-
-  /**
-   * Toggles the sign of the current number on the expression.
-   */
-  toggleSign() {
-    let [firstOperand, secondOperand, operator] = this.parseExpression();
-
-    if (firstOperand === "0") {
-      return;
-    }
-
-    if (!secondOperand) {
-      firstOperand = firstOperand.includes("neg")
-        ? firstOperand.slice(3)
-        : "neg" + firstOperand;
-    } else {
-      secondOperand = secondOperand.includes("neg")
-        ? secondOperand.slice(3)
-        : "neg" + secondOperand;
-    }
-
-    this.expression = operator ?
-    firstOperand + operator + secondOperand :
-    firstOperand;
-
-    writeToDisplay(this.expression);
-  }
+  return operator ? [...operands, ...operator] : [...operands];
 }
+
+/**
+ * Clears the expression.
+ */
+function clearExpression() {
+  calcStore.expression = "0";
+  writeToDisplay(calcStore.expression);
+}
+
+/**
+ * Deletes the last character from the expression.
+ */
+function deleteLastChar() {
+  calcStore.expression = negNumberRegex.test(calcStore.expression)
+    ? calcStore.expression.replace(negNumberRegex, "0")
+    : calcStore.expression.slice(0, -1) || "0";
+
+  writeToDisplay(calcStore.expression);
+}
+
+function calculateResult() {
+  let [firstOperand, secondOperand, operator] = parseExpression();
+
+  if (secondOperand) {
+    [firstOperand, secondOperand] = replaceInOperands(
+      "neg",
+      "-",
+      firstOperand,
+      secondOperand
+    );
+    calcStore.expression = String(
+      OPERATIONS[operator](Number(firstOperand), Number(secondOperand))
+    ).replaceAll("-", "neg");
+  } else {
+    calcStore.expression = firstOperand;
+  }
+
+  writeToDisplay(calcStore.expression);
+}
+
+/**
+ * Appends a value to the calc expression.
+ * @param {string} value - The value to append.
+ */
+function updateExpression(value) {
+  const lastChar = calcStore.expression.slice(-1);
+
+  if (isDot(value) && isDotAllowed(calcStore.expression)) {
+    calcStore.expression += isOperator(lastChar) ? "0." : value;
+  }
+
+  if (isValidChar(value)) {
+    if (isNumber(value) && calcStore.expression === "0") {
+      calcStore.expression = value;
+    } else if (isOperator(value) && isOperator(lastChar)) {
+      calcStore.expression = calcStore.expression.slice(0, -1) + value;
+    } else if (
+      isOperator(value) &&
+      isOperatorInExpression(calcStore.expression)
+    ) {
+      calculateResult();
+      calcStore.expression += value;
+    } else {
+      calcStore.expression += value;
+    }
+  }
+
+  writeToDisplay(calcStore.expression);
+}
+
+/**
+ * Toggles the sign of the current number on the expression.
+ */
+function toggleSign() {
+  let [firstOperand, secondOperand, operator] = parseExpression();
+
+  if (firstOperand === "0") {
+    return;
+  }
+
+  if (!secondOperand) {
+    firstOperand = firstOperand.includes("neg")
+      ? firstOperand.slice(3)
+      : "neg" + firstOperand;
+  } else {
+    secondOperand = secondOperand.includes("neg")
+      ? secondOperand.slice(3)
+      : "neg" + secondOperand;
+  }
+
+  calcStore.expression = operator
+    ? firstOperand + operator + secondOperand
+    : firstOperand;
+
+  writeToDisplay(calcStore.expression);
+}
+
+export {
+  calcStore,
+  calculateResult,
+  clearExpression,
+  deleteLastChar,
+  updateExpression,
+  toggleSign,
+};
