@@ -132,7 +132,6 @@ function updateCalcStore(value) {
     updateOperand(value);
   } else if (isDot(value) && isDotAllowed(currentOperand)) {
     currentOperand.hasDot = true;
-    console.log(calcStore)
   } else if (isOperator(value)) {
     if (calcStore.so.value !== null) {
       calculateResult();
@@ -141,9 +140,9 @@ function updateCalcStore(value) {
     calcStore.operator = value;
   }
 
-  // if (isValidChar(value)) {
+  if (isValidChar(value)) {
     writeToDisplay(calcStore);
-  // }
+  }
 }
 
 /**
