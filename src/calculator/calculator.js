@@ -4,6 +4,8 @@ import {
   isNumber,
   isOperatorInExpression,
   replaceInOperands,
+  isDotAllowed,
+  isValidChar,
 } from "../util/util.js";
 import { OPERATIONS } from "../operations/operations.js";
 import { writeToDisplay } from "../display/display.js";
@@ -77,17 +79,26 @@ export default class Calculator {
   updateExpression(value) {
     const lastChar = this.expression.slice(-1);
 
-    if (isNumber(value) && this.expression === "0") {
-      this.expression = value;
-    } else if (isOperator(value) && isOperator(lastChar)) {
-      this.expression = this.expression.slice(0, -1) + value;
-    } else if (isOperator(value) && isOperatorInExpression(this.expression)) {
-      this.calculateResult();
-      this.expression += value;
-    } else if (isDot(value) && isOperator(lastChar)) {
-      this.expression += "0.";
-    } else {
-      this.expression += value;
+    if (isDot(value) && isDotAllowed(this.expression)) {
+      if (isOperator(lastChar)) {
+        this.expression += "0.";
+      } else {
+        this.expression += value;
+      }
+    }
+
+    if (isValidChar(value)) {
+      if (isNumber(value) && this.expression === "0") {
+        this.expression = value;
+      } else if (isOperator(value) && isOperator(lastChar)) {
+        this.expression = this.expression.slice(0, -1) + value;
+      } else if (isOperator(value) && isOperatorInExpression(this.expression)) {
+        this.calculateResult();
+        this.expression += value;
+      }
+      else {
+        this.expression += value;
+      }
     }
 
     writeToDisplay(this.expression);

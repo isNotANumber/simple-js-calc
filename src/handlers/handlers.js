@@ -1,4 +1,3 @@
-import { isValidChar, isDotAllowed } from "../util/util.js";
 import Calculator from "../calculator/calculator.js";
 
 const calculator = new Calculator();
@@ -15,7 +14,9 @@ function handleCalcThemeToggle() {
  * @param {KeyboardEvent} e - The keydown event.
  */
 function handleKeyDown(e) {
-  switch (e.key) {
+  const value = e.key;
+
+  switch (value) {
     case "Enter":
       calculator.calculateResult();
       break;
@@ -26,15 +27,8 @@ function handleKeyDown(e) {
     case "Backspace":
       calculator.deleteLastChar();
       break;
-    case ".":
-      if (isDotAllowed(calculator.expression)) {
-        calculator.updateExpression(e.key);
-      }
-      break;
     default:
-      if (isValidChar(e.key)) {
-        calculator.updateExpression(e.key);
-      }
+      calculator.updateExpression(value);
       break;
   }
 }
@@ -56,18 +50,11 @@ function handleButtonClick(e) {
     case "=":
       calculator.calculateResult();
       break;
-    case ".":
-      if (isDotAllowed(calculator.expression)) {
-        calculator.updateExpression(value);
-      }
-      break;
     case "+/-":
       calculator.toggleSign();
       break;
     default:
-      if (isValidChar(value)) {
-        calculator.updateExpression(value);
-      }
+      calculator.updateExpression(value);
       break;
   }
 }
