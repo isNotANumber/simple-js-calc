@@ -161,7 +161,7 @@ function updateOperand(value) {
   const currentValueStr = String(currentOperand.value);
 
   if (currentOperand.hasDot) {
-    currentOperand.value = parseFloat(currentValueStr + (isInt(currentOperand.value) ? "." + value : value)).toFixed(1);
+    currentOperand.value = parseFloat(currentValueStr + (isInt(currentOperand.value) ? "." + value : value));
   } else {
     currentOperand.value = parseInt(currentValueStr + value);
   }
