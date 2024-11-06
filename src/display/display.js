@@ -1,12 +1,19 @@
 import { calcDisplay } from "../const/elements.js";
 
 /**
- * Writes the expression on the calculator display.
- * @param {string} expression - calc expression.
+ * Updates the display value based on the current state of the calculator store.
+ *
+ * @param {Object} calcStore - The calculator store object.
+ * @returns {void} This function does not return a value; it updates the display directly.
  */
-function writeToDisplay(expression) {
-  const expressionToDisplay = expression.replaceAll("neg", "-");
-  calcDisplay.value = expressionToDisplay;
+function writeToDisplay(calcStore) {
+  const items = [calcStore.fo.value, calcStore.operator, calcStore.so.value];
+
+  const result = items.filter(item => item !== null).join('');
+
+  if (result !== calcDisplay.value) {
+    calcDisplay.value = result;
+  }
 }
 
 export { writeToDisplay };

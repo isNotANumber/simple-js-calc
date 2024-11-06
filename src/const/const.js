@@ -10,9 +10,4 @@ const validCharsRegex = new RegExp(
   /^[\d]/.source + "|" + operatorsRegex.source
 );
 
-/**
- * Negative number regular expression.S
- */
-const negNumberRegex = /neg\d$/;
-
-export { operatorsRegex, validCharsRegex, negNumberRegex };
+export { operatorsRegex, validCharsRegex };

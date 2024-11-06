@@ -26,14 +26,6 @@ function isOperator(char) {
 }
 
 /**
- * Checks if operator in expression.
- * @param {string} expression - Current displayed expression.
- */
-function isOperatorInExpression(expression) {
-  return operatorsRegex.test(expression);
-}
-
-/**
  * Checks if a character is number.
  * @param {string} char - The character to check.
  */
@@ -45,35 +37,17 @@ function isNumber(char) {
  * Checks if dot allowed to append to number.
  * @param {expression} - current calc expression.
  */
-function isDotAllowed(expression) {
-  const lastNumber = expression.split(operatorsRegex).pop();
-  return !lastNumber.includes(".");
+function isDotAllowed(operand) {
+  return !operand.hasDot;
 }
 
 /**
- * Replaces substrings in operands.
- * @param {string} from
- * @param {string} to
- * @param {*} operands
+ * Checks if a given number is an integer.
+ * @param {number} number - The number to be checked.
+ * @returns {boolean} `true` if `number` is an integer, `false` otherwise.
  */
-function replaceInOperands(from, to, ...operands) {
-  const result = [];
-
-  for (const operand of operands) {
-    operand.includes(from)
-      ? result.push(operand.replace(from, to))
-      : result.push(operand);
-  }
-
-  return result;
+function isInt(number) {
+  return number % 1 === 0;
 }
 
-export {
-  isValidChar,
-  isDot,
-  isOperator,
-  isNumber,
-  isOperatorInExpression,
-  isDotAllowed,
-  replaceInOperands,
-};
+export { isValidChar, isDot, isOperator, isNumber, isDotAllowed, isInt };

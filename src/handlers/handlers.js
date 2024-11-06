@@ -1,9 +1,9 @@
 import {
   calculateResult,
-  clearExpression,
-  deleteLastChar,
-  updateExpression,
-  toggleSign,
+  updateCalcStore,
+  resetCalcStore,
+  toggleCurrentOperandSign,
+  deleteLastChar
 } from "../calculator/calculator.js";
 
 /**
@@ -26,13 +26,13 @@ function handleKeyDown(e) {
       break;
     case "Delete":
     case "Escape":
-      clearExpression();
+      resetCalcStore();
       break;
     case "Backspace":
       deleteLastChar();
       break;
     default:
-      updateExpression(value);
+      updateCalcStore(value);
       break;
   }
 }
@@ -46,7 +46,7 @@ function handleButtonClick(e) {
 
   switch (value) {
     case "AC":
-      clearExpression();
+      resetCalcStore();
       break;
     case "⌫":
       deleteLastChar();
@@ -55,10 +55,10 @@ function handleButtonClick(e) {
       calculateResult();
       break;
     case "+/-":
-      toggleSign();
+      toggleCurrentOperandSign();
       break;
     default:
-      updateExpression(value);
+      updateCalcStore(value);
       break;
   }
 }
