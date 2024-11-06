@@ -6,7 +6,7 @@ const calculator = new Calculator();
 /**
  * Toggles the theme between light and dark.
  */
-function handleThemeToggle() {
+function handleCalcThemeToggle() {
   document.body.classList.toggle("light-theme");
 }
 
@@ -84,4 +84,4 @@ function handleCalcKeyboardEvent(e) {
   }
 }
 
-export { handleThemeToggle, handleCalcKeyboardEvent };
+export { handleCalcThemeToggle, handleCalcKeyboardEvent };
