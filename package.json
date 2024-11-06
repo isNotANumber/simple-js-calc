@@ -1,6 +1,6 @@
 {
     "name": "simple-js-calc",
-    "version": "1.5.1",
+    "version": "1.5.6",
     "private": "false",
     "description": "Простой учебный пет-калькулятор",
     "browserslist": [
