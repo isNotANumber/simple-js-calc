@@ -42,12 +42,14 @@ function isDotAllowed(operand) {
 }
 
 /**
- * Checks if a given number is an integer.
- * @param {number} number - The number to be checked.
- * @returns {boolean} `true` if `number` is an integer, `false` otherwise.
+ * Checks if the number object should have a dot but its value does not have one.
+ * @param {Object} numberObj - The object containing the number and its properties.
+ * @param {number} numberObj.value - The numeric value.
+ * @param {boolean} numberObj.hasDot - Indicates if the number should have a dot.
+ * @returns {boolean} - Returns true if it should have a dot but doesn't, otherwise false.
  */
-function isInt(number) {
-  return number % 1 === 0;
+function needsDot(numberObj) {
+  return numberObj.hasDot === true && Number.isInteger(numberObj.value);
 }
 
-export { isValidChar, isDot, isOperator, isNumber, isDotAllowed, isInt };
+export { isValidChar, isDot, isOperator, isNumber, isDotAllowed, needsDot };

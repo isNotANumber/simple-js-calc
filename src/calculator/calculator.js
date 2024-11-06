@@ -4,7 +4,7 @@ import {
   isNumber,
   isDotAllowed,
   isValidChar,
-  isInt,
+  needsDot
 } from "../util/util.js";
 import { OPERATIONS } from "../operations/operations.js";
 import { writeToDisplay, writeDotToDisplay } from "../display/display.js";
@@ -158,7 +158,7 @@ function handleNumber(value) {
   const currentValueStr = String(currentOperand.value);
 
   if (currentOperand.hasDot) {
-    currentOperand.value = parseFloat(currentValueStr + (isInt(currentOperand.value) ? "." + value : value));
+    currentOperand.value = parseFloat(currentValueStr + (needsDot(currentOperand) ? "." + value : value));
   } else {
     currentOperand.value = parseInt(currentValueStr + value);
   }
