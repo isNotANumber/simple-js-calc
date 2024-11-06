@@ -22,11 +22,7 @@ export default class Calculator {
     const operator = this.expression.match(operatorsRegex);
     const operands = this.expression.split(operator);
 
-    if (operator) {
-      return [...operands, ...operator];
-    } else {
-      return [...operands];
-    }
+    return operator ? [...operands, ...operator] : [...operands]
   }
 
   /**
@@ -41,11 +37,10 @@ export default class Calculator {
    * Deletes the last character from the expression.
    */
   deleteLastChar() {
-    if (negNumberRegex.test(this.expression)) {
-      this.expression = this.expression.replace(negNumberRegex, "0");
-    } else {
-      this.expression = this.expression.slice(0, -1) || "0";
-    }
+    this.expression = negNumberRegex.test(this.expression) ?
+    this.expression.replace(negNumberRegex, "0") :
+    this.expression.slice(0, -1) || "0";
+
     writeToDisplay(this.expression);
   }
 
@@ -80,11 +75,7 @@ export default class Calculator {
     const lastChar = this.expression.slice(-1);
 
     if (isDot(value) && isDotAllowed(this.expression)) {
-      if (isOperator(lastChar)) {
-        this.expression += "0.";
-      } else {
-        this.expression += value;
-      }
+      this.expression += isOperator(lastChar) ? "0." : value;
     }
 
     if (isValidChar(value)) {
@@ -124,11 +115,9 @@ export default class Calculator {
         : "neg" + secondOperand;
     }
 
-    if (operator) {
-      this.expression = firstOperand + operator + secondOperand;
-    } else {
-      this.expression = firstOperand;
-    }
+    this.expression = operator ?
+    firstOperand + operator + secondOperand :
+    firstOperand;
 
     writeToDisplay(this.expression);
   }
