@@ -7,7 +7,6 @@ const calculator = new Calculator();
  * Toggles the theme between light and dark.
  */
 function handleThemeToggle() {
-  document.body.classList.toggle("dark-theme");
   document.body.classList.toggle("light-theme");
 }
 

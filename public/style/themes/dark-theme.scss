@@ -1,7 +1,7 @@
 @use "sass:map";
 @import './themes-var.scss';
 
-.dark-theme {
+body {
   background-color: getDarkThemeKey('background');
   color: getDarkThemeKey('color');
 
