@@ -1,4 +1,4 @@
-import { displayElement } from "../const/elements.js";
+import { calcDisplay } from "../const/elements.js";
 
 /**
  * Writes the expression on the calculator display.
@@ -6,7 +6,7 @@ import { displayElement } from "../const/elements.js";
  */
 function writeToDisplay(expression) {
   const expressionToDisplay = expression.replaceAll("neg", "-");
-  displayElement.value = expressionToDisplay;
+  calcDisplay.value = expressionToDisplay;
 }
 
 export { writeToDisplay };
