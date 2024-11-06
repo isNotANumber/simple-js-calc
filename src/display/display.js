@@ -9,11 +9,15 @@ import { calcDisplay } from "../const/elements.js";
 function writeToDisplay(calcStore) {
   const items = [calcStore.fo.value, calcStore.operator, calcStore.so.value];
 
-  const result = items.filter(item => item !== null).join('');
+  const result = items.filter((item) => item !== null).join("");
 
   if (result !== calcDisplay.value) {
     calcDisplay.value = result;
   }
 }
 
-export { writeToDisplay };
+function writeDotToDisplay() {
+  calcDisplay.value += ".";
+}
+
+export { writeToDisplay, writeDotToDisplay };

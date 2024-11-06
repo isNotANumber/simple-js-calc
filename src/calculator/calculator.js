@@ -7,7 +7,7 @@ import {
   isInt,
 } from "../util/util.js";
 import { OPERATIONS } from "../operations/operations.js";
-import { writeToDisplay } from "../display/display.js";
+import { writeToDisplay, writeDotToDisplay } from "../display/display.js";
 
 /**
  * @typedef {Object} Operand
@@ -93,7 +93,7 @@ function deleteLastChar() {
     } else {
       const updatedValue = String(currentValue).slice(0, -1) || "0";
 
-      lastExpressionItem.value = updatedValue === "-" ? 0 : parseFloat(updatedValue);
+      lastExpressionItem.value = updatedValue === "-" || updatedValue === '.' ? 0 : parseFloat(updatedValue);
     }
   }
 
@@ -126,35 +126,32 @@ function getLastExpressionItem() {
  * @param {string|number} value - The value to update the calculation store with.
  */
 function updateCalcStore(value) {
+  if (!isValidChar(value)) {
+    return;
+  }
+
   const currentOperand = getCurrentOperand();
 
   if (isNumber(value)) {
-    updateOperand(value);
-  } else if (isDot(value) && isDotAllowed(currentOperand)) {
-    currentOperand.hasDot = true;
+    handleNumber(value);
+  } else if (isDot(value)) {
+    handleDot(currentOperand);
   } else if (isOperator(value)) {
-    if (calcStore.so.value !== null) {
-      calculateResult();
-    }
-
-    calcStore.operator = value;
-  }
-
-  if (isValidChar(value)) {
-    writeToDisplay(calcStore);
+    handleOperator(value);
   }
 }
 
 /**
- * Updates the current operand with the given value.
- * Handles the case of decimal numbers and integer concatenation.
- * @param {string|number} value - The value to update the current operand with.
+ * Handles the case when a number is input.
+ * Updates the operand and refreshes the display.
+ * @param {string|number} value - The number to update the current operand with.
  */
-function updateOperand(value) {
+function handleNumber(value) {
   const currentOperand = calcStore.operator !== null ? calcStore.so : calcStore.fo;
 
   if (currentOperand.value === null) {
     currentOperand.value = parseInt(value);
+    writeToDisplay(calcStore);
     return;
   }
 
@@ -165,6 +162,36 @@ function updateOperand(value) {
   } else {
     currentOperand.value = parseInt(currentValueStr + value);
   }
+
+  writeToDisplay(calcStore);
+}
+
+/**
+ * Handles the case when a dot is input.
+ * Updates the current operand to allow a decimal point if valid.
+ * @param {Object} currentOperand - The current operand being updated.
+ */
+function handleDot(currentOperand) {
+  const isSoValueZero = calcStore.operator !== null && calcStore.so.value === 0;
+
+  if (isDotAllowed(currentOperand) && !isSoValueZero) {
+    currentOperand.hasDot = true;
+    writeDotToDisplay();
+  }
+}
+
+/**
+ * Handles the case when an operator is input.
+ * Calculates the result if the second operand is set, and updates the operator.
+ * @param {string} operator - The operator to set in the calculation store.
+ */
+function handleOperator(operator) {
+  if (calcStore.so.value !== null) {
+    calculateResult();
+  }
+
+  calcStore.operator = operator;
+  writeToDisplay(calcStore);
 }
 
 /**
